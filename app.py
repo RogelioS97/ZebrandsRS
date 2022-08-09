@@ -184,7 +184,6 @@ def login():
 # Logout
 @app.route('/logout')
 @is_logged_in
-@is_logged_in_admin
 def logout():
     session.clear()
     flash('You are now logged out', 'success')
