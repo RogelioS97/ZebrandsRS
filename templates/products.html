@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Products <small> Welcome {{session.username}}</small></h1>
+  	{% if session.logged_in and session.roleid == 1 %}
+  		<a class="btn btn-success" href="/add_product"> Add Product</a>
+  	{% endif %}
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>SKU</th>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Price</th>
+      {% if session.logged_in and session.roleid == 1 %}
+        <th></th>
+        <th></th>
+      {% endif %}
+    </tr>
+    {% for product in products %}
+      <tr>
+        <td>{{product.sku}}</td>
+        <td><a href="product/{{product.sku}}">{{product.name}}</a></td>
+        <td>{{product.brand}}</td>
+        <td>{{product.price}}</td>
+        {% if session.logged_in and session.roleid == 1 %}
+	      <td><a href="edit_product/{{product.sku}}" class="btn btn-default pull-right">Edit</a></td>
+	      <td>
+		      <form action="{{url_for('delete_product', sku=product.sku)}}" method="post">
+	            <input type="hidden" name="_method" value="DELETE">
+	            <input type="submit" value="Delete" class="btn btn-danger">
+	          </form>
+      	  </td>
+	    {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

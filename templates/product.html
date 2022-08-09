@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="card text-center">
+  <div class="card-header">
+    SKU: {{product.sku}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Product: {{product.name}}</h5>
+    <p class="card-text">Brand: {{product.brand}}</p>
+    <hr>
+    <a href="/products" class="btn btn-primary">Go Back to Products</a>
+  </div>
+  <div class="card-footer text-muted">
+    Product Views: {{product.views}}
+  </div>
+</div>{% endblock %}
